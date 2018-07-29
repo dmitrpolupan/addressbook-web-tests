@@ -28,7 +28,7 @@ namespace addressbook_web_tests
         }
 
         [Test]
-        public void FirstTest()
+        public void TestGroupCreation()
         {
             NavigateToPage("http://localhost/addressbook/");
             Login(new AccountName("admin", "secret"));
@@ -37,6 +37,61 @@ namespace addressbook_web_tests
             FillInNewGroup(new GroupData("with all", "header", "footer"));
             SubmitGroupCreation();
             ReturnToGroupPage();
+        }
+
+        [Test]
+        public void TestContactCreation()
+        {
+            NavigateToPage("http://localhost/addressbook/");
+            Login(new AccountName("admin", "secret"));
+            driver.FindElement(By.LinkText("ADD_NEW")).Click();
+            InitAddNewContact();
+            //FillInContactCreation(new ContactData("First", "Middle", "Last", "Nickname", "Title", "Company", "Address"), new PhoneForContact("555", "666", "777", "123-456"), new SecondaryInfoForContact("address2", "number", "notes"));
+            FillInContactCreation(new ContactData("First", "Middle", "Last", "Nickname", "Title", "Company", "Address", "555", "666", "777", "123-456", "address2", "number", "notes");
+            SubmitContactCreation();
+
+        }
+
+        private void FillInContactCreation(ContactData condata, PhoneForContact phoneForContact, SecondaryInfoForContact secondary)
+        {
+            driver.FindElement(By.Name("firstname")).Clear();
+            driver.FindElement(By.Name("firstname")).SendKeys(condata.Firstname);
+            driver.FindElement(By.Name("middlename")).Clear();
+            driver.FindElement(By.Name("middlename")).SendKeys(condata.Middlename);
+            driver.FindElement(By.Name("lastname")).Clear();
+            driver.FindElement(By.Name("lastname")).SendKeys(condata.LastName);
+            driver.FindElement(By.Name("nickname")).Clear();
+            driver.FindElement(By.Name("nickname")).SendKeys(condata.Nickname);
+            driver.FindElement(By.Name("title")).Clear();
+            driver.FindElement(By.Name("title")).SendKeys(condata.Title);
+            driver.FindElement(By.Name("company")).Clear();
+            driver.FindElement(By.Name("company")).SendKeys(condata.Company);
+            driver.FindElement(By.Name("address")).Clear();
+            driver.FindElement(By.Name("address")).SendKeys(condata.Address);
+            driver.FindElement(By.Name("home")).Clear();
+            driver.FindElement(By.Name("home")).SendKeys(phoneForContact.Phone_Home);
+            driver.FindElement(By.Name("mobile")).Clear();
+            driver.FindElement(By.Name("mobile")).SendKeys(phoneForContact.Phone_Mobile);
+            driver.FindElement(By.Name("work")).Clear();
+            driver.FindElement(By.Name("work")).SendKeys(phoneForContact.Phone_Work);
+            driver.FindElement(By.Name("fax")).Clear();
+            driver.FindElement(By.Name("fax")).SendKeys(phoneForContact.Fax);
+            driver.FindElement(By.Name("address2")).Clear();
+            driver.FindElement(By.Name("address2")).SendKeys(secondary.Secondary_Address);
+            driver.FindElement(By.Name("phone2")).Clear();
+            driver.FindElement(By.Name("phone2")).SendKeys(secondary.Secondary_Phone_number);
+            driver.FindElement(By.Name("notes")).Clear();
+            driver.FindElement(By.Name("notes")).SendKeys(secondary.Notes);
+        }
+
+        private void SubmitContactCreation()
+        {
+            driver.FindElement(By.Name("submit")).Click();
+        }
+
+        private void InitAddNewContact()
+        {
+            driver.FindElement(By.Name("quickadd")).Click();
         }
 
         private void ReturnToGroupPage()

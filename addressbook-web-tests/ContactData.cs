@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace addressbook_web_tests
+{
+    class ContactData
+    {
+        public string Firstname { get; set; }
+        public string Middlename { get; set; }
+        public string LastName { get; set; }
+        public string Nickname { get; set; }
+        public string Title { get; set; }
+        public string Company { get; set; }
+        public string Address { get; set; }
+        public PhoneForContact phoneForContact;
+        public SecondaryInfoForContact secondaryInfoForContact;
+
+        public ContactData() { }
+
+        public ContactData (string firstname, string middlename, string lastname, string nickname, string title, 
+            string company, string address, string home, string mobile, string work, string fax,
+            string secondary_address, string number, string notes)
+        {
+            Firstname = firstname;
+            Middlename = middlename;
+            LastName = lastname;
+            Nickname = nickname;
+            Title = title;
+            Company = company;
+            Address = address;
+            phoneForContact = new PhoneForContact(home, mobile, work, fax);
+            secondaryInfoForContact = new SecondaryInfoForContact(secondary_address, number, notes);
+        }
+    }
+}
