@@ -91,7 +91,8 @@ namespace addressbook_web_tests
 
         private void InitAddNewContact()
         {
-            driver.FindElement(By.Name("quickadd")).Click();
+            //driver.FindElement(By.Name("quickadd")).Click();
+            driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
         }
 
         private void ReturnToGroupPage()
