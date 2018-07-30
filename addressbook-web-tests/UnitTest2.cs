@@ -46,7 +46,7 @@ namespace addressbook_web_tests
             Login(new AccountName("admin", "secret"));
             driver.FindElement(By.LinkText("ADD_NEW")).Click();
             InitAddNewContact();
-            //--FillInContactCreation(new ContactData("First", "Middle", "Last", "Nickname", "Title", "Company", "Address", new PhoneForContact("555", "666", "777", "123-456"), new SecondaryInfoForContact("address2", "number", "notes")));
+            FillInContactCreation(new ContactData("First", "Middle", "Last", "Nickname", "Title", "Company", "Address", new PhoneForContact("555", "666", "777", "123-456"), new SecondaryInfoForContact("address2", "number", "notes")));
             //FillInContactCreation(new ContactData("First", "Middle", "Last", "Nickname", "Title", "Company", "Address", "555", "666", "777", "123-456", "address2", "number", "notes"));
             SubmitContactCreation();
 
