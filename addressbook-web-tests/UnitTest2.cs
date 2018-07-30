@@ -46,13 +46,13 @@ namespace addressbook_web_tests
             Login(new AccountName("admin", "secret"));
             driver.FindElement(By.LinkText("ADD_NEW")).Click();
             InitAddNewContact();
-            //FillInContactCreation(new ContactData("First", "Middle", "Last", "Nickname", "Title", "Company", "Address"), new PhoneForContact("555", "666", "777", "123-456"), new SecondaryInfoForContact("address2", "number", "notes"));
-            FillInContactCreation(new ContactData("First", "Middle", "Last", "Nickname", "Title", "Company", "Address", "555", "666", "777", "123-456", "address2", "number", "notes");
+           // FillInContactCreation(new ContactData("First", "Middle", "Last", "Nickname", "Title", "Company", "Address", new PhoneForContact("555", "666", "777", "123-456"), new SecondaryInfoForContact("address2", "number", "notes")));
+            //FillInContactCreation(new ContactData("First", "Middle", "Last", "Nickname", "Title", "Company", "Address", "555", "666", "777", "123-456", "address2", "number", "notes"));
             SubmitContactCreation();
 
         }
 
-        private void FillInContactCreation(ContactData condata, PhoneForContact phoneForContact, SecondaryInfoForContact secondary)
+        private void FillInContactCreation(ContactData condata)
         {
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys(condata.Firstname);
@@ -69,19 +69,19 @@ namespace addressbook_web_tests
             driver.FindElement(By.Name("address")).Clear();
             driver.FindElement(By.Name("address")).SendKeys(condata.Address);
             driver.FindElement(By.Name("home")).Clear();
-            driver.FindElement(By.Name("home")).SendKeys(phoneForContact.Phone_Home);
+            driver.FindElement(By.Name("home")).SendKeys(condata.PhoneForContact.Phone_Home);
             driver.FindElement(By.Name("mobile")).Clear();
-            driver.FindElement(By.Name("mobile")).SendKeys(phoneForContact.Phone_Mobile);
+            driver.FindElement(By.Name("mobile")).SendKeys(condata.PhoneForContact.Phone_Mobile);
             driver.FindElement(By.Name("work")).Clear();
-            driver.FindElement(By.Name("work")).SendKeys(phoneForContact.Phone_Work);
+            driver.FindElement(By.Name("work")).SendKeys(condata.PhoneForContact.Phone_Work);
             driver.FindElement(By.Name("fax")).Clear();
-            driver.FindElement(By.Name("fax")).SendKeys(phoneForContact.Fax);
+            driver.FindElement(By.Name("fax")).SendKeys(condata.PhoneForContact.Fax);
             driver.FindElement(By.Name("address2")).Clear();
-            driver.FindElement(By.Name("address2")).SendKeys(secondary.Secondary_Address);
+            driver.FindElement(By.Name("address2")).SendKeys(condata.SecondaryInfoForContact.Secondary_Address);
             driver.FindElement(By.Name("phone2")).Clear();
-            driver.FindElement(By.Name("phone2")).SendKeys(secondary.Secondary_Phone_number);
+            driver.FindElement(By.Name("phone2")).SendKeys(condata.SecondaryInfoForContact.Secondary_Phone_number);
             driver.FindElement(By.Name("notes")).Clear();
-            driver.FindElement(By.Name("notes")).SendKeys(secondary.Notes);
+            driver.FindElement(By.Name("notes")).SendKeys(condata.SecondaryInfoForContact.Notes);
         }
 
         private void SubmitContactCreation()

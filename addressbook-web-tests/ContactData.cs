@@ -15,14 +15,16 @@ namespace addressbook_web_tests
         public string Title { get; set; }
         public string Company { get; set; }
         public string Address { get; set; }
-        public PhoneForContact phoneForContact;
-        public SecondaryInfoForContact secondaryInfoForContact;
+        public PhoneForContact PhoneForContact { get; set; }
+        public SecondaryInfoForContact SecondaryInfoForContact { get; set; }
 
         public ContactData() { }
 
-        public ContactData (string firstname, string middlename, string lastname, string nickname, string title, 
-            string company, string address, string home, string mobile, string work, string fax,
-            string secondary_address, string number, string notes)
+        //public ContactData (string firstname, string middlename, string lastname, string nickname, string title, 
+          //  string company, string address, string home, string mobile, string work, string fax,
+            //string secondary_address, string number, string notes)
+        public ContactData(string firstname, string middlename, string lastname, string nickname, string title,
+            string company, string address, PhoneForContact phoneForContact, SecondaryInfoForContact secondaryInfoForContact)
         {
             Firstname = firstname;
             Middlename = middlename;
@@ -31,8 +33,12 @@ namespace addressbook_web_tests
             Title = title;
             Company = company;
             Address = address;
-            phoneForContact = new PhoneForContact(home, mobile, work, fax);
-            secondaryInfoForContact = new SecondaryInfoForContact(secondary_address, number, notes);
+            PhoneForContact = phoneForContact;
+            SecondaryInfoForContact = secondaryInfoForContact;
+            //phoneForContact = new PhoneForContact(home, mobile, work, fax);
+            //secondaryInfoForContact = new SecondaryInfoForContact(secondary_address, number, notes);
         }
+
+        
     }
 }
