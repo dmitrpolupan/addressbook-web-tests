@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace addressbook_web_tests
 {
-    class SecondaryInfoForContact
+    public class SecondaryInfoForContact
     {
         public string Secondary_Address { get; set; }
         public string Secondary_Phone_number { get; set; }

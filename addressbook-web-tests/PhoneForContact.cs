@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace addressbook_web_tests
 {
-    class PhoneForContact
+    public class PhoneForContact
     {
         public string Phone_Home { get; set; }
         public string Phone_Mobile { get; set; }
