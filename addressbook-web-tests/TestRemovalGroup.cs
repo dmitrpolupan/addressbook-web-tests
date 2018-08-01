@@ -10,12 +10,12 @@ namespace addressbook_web_tests
         [Test]
         public void TestRemovalGroup()
         {
-            NavigateToPage("http://localhost/addressbook/");
-            Login(new AccountName("admin", "secret"));
-            NavigateToGroupPage();
-            SelectGroup(1);
-            DeleteGroup();
-            GoBackToGroupPage();
+            navigator.NavigateToPage("http://localhost/addressbook/");
+            loginHelper.Login(new AccountName("admin", "secret"));
+            navigator.NavigateToGroupPage();
+            groupHelper.SelectGroup(1);
+            groupHelper.DeleteGroup();
+            navigator.GoBackToGroupPage();
         } 
     }
 }
