@@ -16,7 +16,7 @@ namespace addressbook_web_tests
             groupHelper.InitGroupCreation();
             groupHelper.FillInNewGroup(new GroupData("with all", "header", "footer"));
             groupHelper.SubmitGroupCreation();
-            navigator.GoBackToGroupPage();
+            groupHelper.GoBackToGroupPage();
         }
 
         [Test]

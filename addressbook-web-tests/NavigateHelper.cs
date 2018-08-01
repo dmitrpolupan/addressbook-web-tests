@@ -28,12 +28,7 @@ namespace addressbook_web_tests
         {
             driver.FindElement(By.LinkText("GROUPS")).Click();
         }
-
-        public void GoBackToGroupPage()
-        {
-            driver.FindElement(By.LinkText("group page")).Click();
-        }
-
+        
         public void NavigateToCreationContactPage()
         {
             driver.FindElement(By.LinkText("ADD_NEW")).Click();

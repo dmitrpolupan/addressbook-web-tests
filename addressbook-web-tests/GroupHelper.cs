@@ -47,5 +47,10 @@ namespace addressbook_web_tests
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
         }
+
+        public void GoBackToGroupPage()
+        {
+            driver.FindElement(By.LinkText("group page")).Click();
+        }
     }
 }

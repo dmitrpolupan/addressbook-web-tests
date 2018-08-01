@@ -15,7 +15,7 @@ namespace addressbook_web_tests
             navigator.NavigateToGroupPage();
             groupHelper.SelectGroup(1);
             groupHelper.DeleteGroup();
-            navigator.GoBackToGroupPage();
+            groupHelper.GoBackToGroupPage();
         } 
     }
 }
