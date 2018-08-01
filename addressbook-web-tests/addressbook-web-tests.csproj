@@ -59,20 +59,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountName.cs" />
-    <Compile Include="BaseHelper.cs" />
-    <Compile Include="ContactData.cs" />
-    <Compile Include="ContactHelper.cs" />
-    <Compile Include="GroupData.cs" />
-    <Compile Include="GroupHelper.cs" />
-    <Compile Include="LoginHelper.cs" />
-    <Compile Include="NavigateHelper.cs" />
-    <Compile Include="PhoneForContact.cs" />
+    <Compile Include="model\AccountName.cs" />
+    <Compile Include="appmanager\ApplicationManager.cs" />
+    <Compile Include="appmanager\BaseHelper.cs" />
+    <Compile Include="model\ContactData.cs" />
+    <Compile Include="appmanager\ContactHelper.cs" />
+    <Compile Include="model\GroupData.cs" />
+    <Compile Include="appmanager\GroupHelper.cs" />
+    <Compile Include="appmanager\LoginHelper.cs" />
+    <Compile Include="appmanager\NavigateHelper.cs" />
+    <Compile Include="model\PhoneForContact.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SecondaryInfoForContact.cs" />
-    <Compile Include="TestBase.cs" />
-    <Compile Include="TestRemovalGroup.cs" />
-    <Compile Include="TestGroupContactCreation.cs" />
+    <Compile Include="model\SecondaryInfoForContact.cs" />
+    <Compile Include="tests\TestBase.cs" />
+    <Compile Include="tests\TestRemovalGroup.cs" />
+    <Compile Include="tests\TestGroupContactCreation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
