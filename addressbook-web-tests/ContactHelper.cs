@@ -9,13 +9,11 @@ using OpenQA.Selenium.Chrome;
 
 namespace addressbook_web_tests
 {
-    public class ContactHelper
+    public class ContactHelper : BaseHelper
     {
-        private IWebDriver driver;
 
-        public ContactHelper(IWebDriver driver)
+        public ContactHelper(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
         }
 
         public void InitAddNewContact()

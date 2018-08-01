@@ -10,13 +10,11 @@ using OpenQA.Selenium.Chrome;
 
 namespace addressbook_web_tests
 {
-    public class LoginHelper
+    public class LoginHelper : BaseHelper
     {
-        private IWebDriver driver;
 
-        public LoginHelper(IWebDriver driver)
+        public LoginHelper(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
         }
 
         public void Login(AccountName account)

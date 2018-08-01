@@ -9,13 +9,10 @@ using OpenQA.Selenium.Chrome;
 
 namespace addressbook_web_tests
 {
-    public class GroupHelper
+    public class GroupHelper : BaseHelper
     {
-        private IWebDriver driver;
-
-        public GroupHelper(IWebDriver driver)
+        public GroupHelper(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
         }
 
         public void InitGroupCreation()

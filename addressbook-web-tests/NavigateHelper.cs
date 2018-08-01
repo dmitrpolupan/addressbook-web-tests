@@ -10,13 +10,11 @@ using OpenQA.Selenium.Chrome;
 
 namespace addressbook_web_tests
 {
-    public class NavigateHelper
+    public class NavigateHelper : BaseHelper
     {
-        public IWebDriver driver;
-
-        public NavigateHelper(IWebDriver driver)
+        
+        public NavigateHelper(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
         }
 
         public void NavigateToPage(string uri)
