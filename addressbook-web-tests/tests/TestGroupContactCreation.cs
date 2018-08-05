@@ -10,20 +10,23 @@ namespace addressbook_web_tests
         [Test]
         public void TestGroupCreation()
         {
-            app.Navigator.NavigateToPage("http://localhost/addressbook/");
-            app.Auth.Login(new AccountName("admin", "secret"));
-            app.Navigator.NavigateToGroupPage();
-            app.Groups.InitGroupCreation();
-            app.Groups.FillInNewGroup(new GroupData("with all", "header", "footer"));
-            app.Groups.SubmitGroupCreation();
-            app.Groups.GoBackToGroupPage();
+            GroupData group = new GroupData("with al", "header", "footer");
+
+            app.Groups.Create(group);
+                
+        }
+
+        [Test]
+        public void EmptyTestGroupCreation()
+        {
+            GroupData group = new GroupData("", "", "");
+            
+            app.Groups.Create(group);
         }
 
         [Test]
         public void TestContactCreation()
         {
-            app.Navigator.NavigateToPage("http://localhost/addressbook/");
-            app.Auth.Login(new AccountName("admin", "secret"));
             app.Navigator.NavigateToCreationContactPage();
             app.Contacts.InitAddNewContact();
             app.Contacts.FillInContactCreation(new ContactData("First", "Middle", "Last", "Nickname", "Title", "Company", "Address", new PhoneForContact("555", "666", "777", "123-456"), new SecondaryInfoForContact("address2", "number", "notes")));

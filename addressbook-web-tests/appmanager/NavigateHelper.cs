@@ -12,14 +12,16 @@ namespace addressbook_web_tests
 {
     public class NavigateHelper : BaseHelper
     {
+        private string baseURL;
         
-        public NavigateHelper(IWebDriver driver) : base(driver)
+        public NavigateHelper(ApplicationManager manager, string baseURL) : base(manager)
         {
+            this.baseURL = baseURL;
         }
 
-        public void NavigateToPage(string uri)
+        public void NavigateToPage()
         {
-            driver.Url = uri;
+            driver.Navigate().GoToUrl(baseURL + "/addressbook/");
         }
 
         public void NavigateToGroupPage()

@@ -13,6 +13,7 @@ namespace addressbook_web_tests
     {
         protected IWebDriver driver;
         protected WebDriverWait wait;
+        protected string baseURL;
 
         protected LoginHelper loginHelper;
         protected NavigateHelper navigator;
@@ -30,10 +31,20 @@ namespace addressbook_web_tests
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             driver.Manage().Cookies.DeleteAllCookies();
 
-            loginHelper = new LoginHelper(driver);
-            navigator = new NavigateHelper(driver);
-            groupHelper = new GroupHelper(driver);
-            contactHelper = new ContactHelper(driver);
+            baseURL = "http://localhost";
+
+            loginHelper = new LoginHelper(this);
+            navigator = new NavigateHelper(this, baseURL);
+            groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
+        }
+
+        public IWebDriver Driver
+        {
+            get
+            {
+                return driver;
+            }
         }
 
         public void Stop()

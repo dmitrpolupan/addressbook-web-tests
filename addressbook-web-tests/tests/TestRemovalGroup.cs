@@ -10,12 +10,7 @@ namespace addressbook_web_tests
         [Test]
         public void TestRemovalGroup()
         {
-            app.Navigator.NavigateToPage("http://localhost/addressbook/");
-            app.Auth.Login(new AccountName("admin", "secret"));
-            app.Navigator.NavigateToGroupPage();
-            app.Groups.SelectGroup(1);
-            app.Groups.DeleteGroup();
-            app.Groups.GoBackToGroupPage();
-        } 
+            app.Groups.Remove(2);
+       } 
     }
 }

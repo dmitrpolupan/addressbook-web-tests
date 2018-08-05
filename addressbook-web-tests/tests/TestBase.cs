@@ -19,6 +19,9 @@ namespace addressbook_web_tests
         public void start()
         {
             app = new ApplicationManager();
+            //app.Navigator.NavigateToPage("http://localhost/addressbook/");
+            app.Navigator.NavigateToPage();
+            app.Auth.Login(new AccountName("admin", "secret"));
         }
 
         [TearDown]
