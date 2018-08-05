@@ -33,5 +33,10 @@ namespace addressbook_web_tests
         {
             driver.FindElement(By.LinkText("ADD_NEW")).Click();
         }
+
+        public void NavigateToHomePage()
+        {
+            driver.FindElement(By.LinkText("HOME")).Click();
+        }
     }
 }

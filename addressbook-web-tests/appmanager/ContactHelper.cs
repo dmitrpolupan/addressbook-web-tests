@@ -16,12 +16,35 @@ namespace addressbook_web_tests
         {
         }
 
-        public void InitAddNewContact()
+        public ContactHelper Create(ContactData contact)
         {
-            driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
+            manager.Navigator.NavigateToCreationContactPage();
+
+            InitAddNewContact();
+            FillInContactCreation(contact);
+            SubmitContactCreation();
+            return this;
         }
 
-        public void FillInContactCreation(ContactData condata)
+        public ContactHelper Remove(int v)
+        {
+            manager.Navigator.NavigateToHomePage();
+
+            SelectContact(v);
+            //InitContactModification(v);
+            DeleteContact();
+            manager.Alerter.ClickOk();
+            return this;
+        }
+
+        
+        public ContactHelper InitAddNewContact()
+        {
+            driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
+            return this;
+        }
+
+        public ContactHelper FillInContactCreation(ContactData condata)
         {
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys(condata.Firstname);
@@ -51,11 +74,32 @@ namespace addressbook_web_tests
             driver.FindElement(By.Name("phone2")).SendKeys(condata.SecondaryInfoForContact.Secondary_Phone_number);
             driver.FindElement(By.Name("notes")).Clear();
             driver.FindElement(By.Name("notes")).SendKeys(condata.SecondaryInfoForContact.Notes);
+            return this;
         }
 
-        public void SubmitContactCreation()
+        public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            return this;
         }
+
+        public ContactHelper DeleteContact()
+        {
+            driver.FindElement(By.XPath("(//input[@value='DELETE'])")).Click();
+            return this;
+        }
+        //не работает
+        public ContactHelper InitContactModification(int v)
+        {
+            driver.FindElement(By.LinkText("edit.php?id=" + v)).Click();
+            return this;
+        }
+
+        public ContactHelper SelectContact(int v)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + v + "]")).Click();
+            return this;
+        }
+        
     }
 }

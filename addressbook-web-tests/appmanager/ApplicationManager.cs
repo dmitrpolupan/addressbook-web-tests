@@ -19,6 +19,7 @@ namespace addressbook_web_tests
         protected NavigateHelper navigator;
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
+        protected AlertHelper alerter;
 
 
         public ApplicationManager()
@@ -37,6 +38,7 @@ namespace addressbook_web_tests
             navigator = new NavigateHelper(this, baseURL);
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
+            alerter = new AlertHelper(this);
         }
 
         public IWebDriver Driver
@@ -82,6 +84,14 @@ namespace addressbook_web_tests
             get
             {
                 return contactHelper;
+            }
+        }
+
+        public AlertHelper Alerter
+        {
+            get
+            {
+                return alerter;
             }
         }
         

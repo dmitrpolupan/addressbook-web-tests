@@ -59,6 +59,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="appmanager\AlertHelper.cs" />
+    <Compile Include="tests\ContactRemovalTests.cs" />
+    <Compile Include="tests\GroupModificationTests.cs" />
     <Compile Include="model\AccountName.cs" />
     <Compile Include="appmanager\ApplicationManager.cs" />
     <Compile Include="appmanager\BaseHelper.cs" />
@@ -71,9 +74,10 @@
     <Compile Include="model\PhoneForContact.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="model\SecondaryInfoForContact.cs" />
+    <Compile Include="tests\ContactCreationTests.cs" />
     <Compile Include="tests\TestBase.cs" />
-    <Compile Include="tests\TestRemovalGroup.cs" />
-    <Compile Include="tests\TestGroupContactCreation.cs" />
+    <Compile Include="tests\GroupRemovalTests.cs" />
+    <Compile Include="tests\GroupCreationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
