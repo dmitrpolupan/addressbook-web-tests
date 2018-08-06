@@ -75,10 +75,11 @@ namespace addressbook_web_tests
             driver.FindElement(By.XPath("(//input[@value='DELETE'])")).Click();
             return this;
         }
-        //не работает
+        
         public ContactHelper InitContactModification(int v)
         {
-            driver.FindElement(By.LinkText("edit.php?id=" + v)).Click();
+            int a = v + 1;
+            driver.FindElement(By.XPath("(//table[@id='maintable']//tr[" + a + "]/td[8]/a)")).Click();
             return this;
         }
 
