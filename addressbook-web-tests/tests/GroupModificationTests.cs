@@ -10,7 +10,7 @@ namespace addressbook_web_tests
         [Test]
         public void GroupModificationTest()
         {
-            GroupData newGroup = new GroupData("updated_new", "header", "footer");
+            GroupData newGroup = new GroupData("updated_new", null, null);
 
             app.Groups.Modify(1, newGroup);
 

@@ -46,34 +46,21 @@ namespace addressbook_web_tests
 
         public ContactHelper FillInContactCreation(ContactData condata)
         {
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(condata.Firstname);
-            driver.FindElement(By.Name("middlename")).Clear();
-            driver.FindElement(By.Name("middlename")).SendKeys(condata.Middlename);
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(condata.LastName);
-            driver.FindElement(By.Name("nickname")).Clear();
-            driver.FindElement(By.Name("nickname")).SendKeys(condata.Nickname);
-            driver.FindElement(By.Name("title")).Clear();
-            driver.FindElement(By.Name("title")).SendKeys(condata.Title);
-            driver.FindElement(By.Name("company")).Clear();
-            driver.FindElement(By.Name("company")).SendKeys(condata.Company);
-            driver.FindElement(By.Name("address")).Clear();
-            driver.FindElement(By.Name("address")).SendKeys(condata.Address);
-            driver.FindElement(By.Name("home")).Clear();
-            driver.FindElement(By.Name("home")).SendKeys(condata.PhoneForContact.Phone_Home);
-            driver.FindElement(By.Name("mobile")).Clear();
-            driver.FindElement(By.Name("mobile")).SendKeys(condata.PhoneForContact.Phone_Mobile);
-            driver.FindElement(By.Name("work")).Clear();
-            driver.FindElement(By.Name("work")).SendKeys(condata.PhoneForContact.Phone_Work);
-            driver.FindElement(By.Name("fax")).Clear();
-            driver.FindElement(By.Name("fax")).SendKeys(condata.PhoneForContact.Fax);
-            driver.FindElement(By.Name("address2")).Clear();
-            driver.FindElement(By.Name("address2")).SendKeys(condata.SecondaryInfoForContact.Secondary_Address);
-            driver.FindElement(By.Name("phone2")).Clear();
-            driver.FindElement(By.Name("phone2")).SendKeys(condata.SecondaryInfoForContact.Secondary_Phone_number);
-            driver.FindElement(By.Name("notes")).Clear();
-            driver.FindElement(By.Name("notes")).SendKeys(condata.SecondaryInfoForContact.Notes);
+            Type(By.Name("firstname"), condata.Firstname);
+            Type(By.Name("middlename"), condata.Middlename);
+            Type(By.Name("lastname"), condata.LastName);
+            Type(By.Name("nickname"), condata.Nickname);
+            Type(By.Name("title"), condata.Title);
+            Type(By.Name("company"), condata.Company);
+            Type(By.Name("address"), condata.Address);
+            Type(By.Name("home"), condata.PhoneForContact.Phone_Home);
+            Type(By.Name("mobile"), condata.PhoneForContact.Phone_Mobile);
+            Type(By.Name("work"), condata.PhoneForContact.Phone_Work);
+            Type(By.Name("fax"), condata.PhoneForContact.Fax);
+            Type(By.Name("address2"), condata.SecondaryInfoForContact.Secondary_Address);
+            Type(By.Name("phone2"), condata.SecondaryInfoForContact.Secondary_Phone_number);
+            Type(By.Name("notes"), condata.SecondaryInfoForContact.Notes);
+            
             return this;
         }
 
