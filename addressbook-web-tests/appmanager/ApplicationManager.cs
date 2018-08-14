@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -21,8 +22,9 @@ namespace addressbook_web_tests
         protected ContactHelper contactHelper;
         protected AlertHelper alerter;
 
+        private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
-        public ApplicationManager()
+        private ApplicationManager()
         {
             ChromeOptions options = new ChromeOptions();
             ////options.AddArguments("start-fullscreen");
@@ -41,6 +43,25 @@ namespace addressbook_web_tests
             alerter = new AlertHelper(this);
         }
 
+        ~ApplicationManager()
+        {
+            driver.Quit();
+            driver = null;
+        }
+
+        public static ApplicationManager GetInstance()
+        {
+            if (!app.IsValueCreated)
+            {
+                ApplicationManager newInstance = new ApplicationManager();
+                newInstance.Navigator.NavigateToPage();
+                //newInstance.Navigator.NavigateToPage1("http://localhost/addressbook/");
+                app.Value = newInstance;
+                
+            }
+            return app.Value;
+        }
+
         public IWebDriver Driver
         {
             get
@@ -49,11 +70,7 @@ namespace addressbook_web_tests
             }
         }
 
-        public void Stop()
-        {
-            driver.Quit();
-            driver = null;
-        }
+
 
         public LoginHelper Auth
         {
@@ -94,6 +111,6 @@ namespace addressbook_web_tests
                 return alerter;
             }
         }
-        
+
     }
 }

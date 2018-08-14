@@ -19,9 +19,40 @@ namespace addressbook_web_tests
 
         public void Login(AccountName account)
         {
+
+            if (isLoggedIn())
+            {
+                if (isLoggedIn(account))
+                {
+                    return;
+                }
+
+                Logout();
+            }
             Type(By.Name("user"), account.Name);
             Type(By.Name("pass"), account.Password);
             driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
         }
+
+        public void Logout()
+        {
+            if (isLoggedIn())
+            {
+                driver.FindElement(By.LinkText("LOGOUT")).Click();
+            }
+            
+        }
+
+        public bool isLoggedIn()
+        {
+            return isElementPresent(By.Name("logout"));
+        }
+
+        public bool isLoggedIn(AccountName account)
+        {
+            return isLoggedIn() && driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text 
+                == "(" + account.Name + ")";
+        }
+        
     }
 }

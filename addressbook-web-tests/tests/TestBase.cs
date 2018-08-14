@@ -16,19 +16,13 @@ namespace addressbook_web_tests
         protected ApplicationManager app;
 
         [SetUp]
-        public void start()
+        public void SetupApplicationManager()
         {
-            app = new ApplicationManager();
-            //app.Navigator.NavigateToPage("http://localhost/addressbook/");
-            app.Navigator.NavigateToPage();
-            app.Auth.Login(new AccountName("admin", "secret"));
+            app = ApplicationManager.GetInstance();
+            
         }
 
-        [TearDown]
-        public void stop()
-        {
-            app.Stop();
-        }
-        
+
+
     }
 }
