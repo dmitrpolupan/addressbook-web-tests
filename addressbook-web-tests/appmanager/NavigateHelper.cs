@@ -29,6 +29,10 @@ namespace addressbook_web_tests
         }
         public void NavigateToPage1(string baseurl)
         {
+            if (driver.Url == baseURL + "/addressbook/")
+            {
+                return;
+            }
             driver.Navigate().GoToUrl(baseurl);
         }
 
@@ -43,11 +47,19 @@ namespace addressbook_web_tests
         
         public void NavigateToCreationContactPage()
         {
+            if(driver.Url == baseURL + "/addressbook/edit.php" && isElementPresent(By.Name("quickadd")))
+            {
+                return;
+            }
             driver.FindElement(By.LinkText("ADD_NEW")).Click();
         }
 
         public void NavigateToHomePage()
         {
+            if (driver.Url == baseURL + "/addressbook/")
+            {
+                return;
+            }
             driver.FindElement(By.LinkText("HOME")).Click();
         }
     }

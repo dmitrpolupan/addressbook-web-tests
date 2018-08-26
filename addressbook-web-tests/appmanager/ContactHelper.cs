@@ -22,16 +22,34 @@ namespace addressbook_web_tests
 
             InitAddNewContact();
             FillInContactCreation(contact);
-            SubmitContactCreation();
+            SubmitContactCreating();
             return this;
         }
+
+        internal ContactHelper Modify(int v, ContactData newContact)
+        {
+            manager.Navigator.NavigateToHomePage();
+            if (!isElementPresent(By.XPath("(//input[@name='selected[]'])[1]")))
+            {
+                ContactData cont = new ContactData("t1", "t1", "t1", "t1", "t1", "t1", "t1", new PhoneForContact("t1", "t1", "t1", "t1"), new SecondaryInfoForContact("t1", "t1", "t1"));
+                Create(cont);
+            }
+            InitContactModification(v);
+            FillInContactCreation(newContact);
+            SubmitContactUpdating();
+            return this;
+        }
+        
 
         public ContactHelper Remove(int v)
         {
             manager.Navigator.NavigateToHomePage();
-
+            if (!isElementPresent(By.XPath("(//input[@name='selected[]'])[1]")))
+            {
+                ContactData cont = new ContactData("t1", "t1", "t1", "t1", "t1", "t1", "t1", new PhoneForContact("t1", "t1", "t1", "t1"), new SecondaryInfoForContact("t1", "t1", "t1"));
+                Create(cont);
+            }
             SelectContact(v);
-            //InitContactModification(v);
             DeleteContact();
             manager.Alerter.ClickOk();
             return this;
@@ -64,7 +82,7 @@ namespace addressbook_web_tests
             return this;
         }
 
-        public ContactHelper SubmitContactCreation()
+        public ContactHelper SubmitContactCreating()
         {
             driver.FindElement(By.Name("submit")).Click();
             return this;
@@ -88,6 +106,12 @@ namespace addressbook_web_tests
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + v + "]")).Click();
             return this;
         }
-        
+
+        private ContactHelper SubmitContactUpdating()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
     }
 }

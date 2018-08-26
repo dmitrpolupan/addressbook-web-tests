@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="appmanager\AlertHelper.cs" />
     <Compile Include="tests\AuthTestBase.cs" />
+    <Compile Include="tests\ContactModificationTests.cs" />
     <Compile Include="tests\ContactRemovalTests.cs" />
     <Compile Include="tests\GroupModificationTests.cs" />
     <Compile Include="model\AccountName.cs" />

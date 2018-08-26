@@ -29,7 +29,11 @@ namespace addressbook_web_tests
         public GroupHelper Modify(int v, GroupData newGroup)
         {
             manager.Navigator.NavigateToGroupPage();
-
+            if (!isElementPresent(By.XPath("(//input[@name='selected[]'])[1]")))
+            {
+                GroupData group = new GroupData("any", "test", "todel");
+                Create(group);
+            }
             SelectGroup(v);
             InitGroupModification();
             FillInNewGroup(newGroup);
@@ -41,6 +45,13 @@ namespace addressbook_web_tests
         public GroupHelper Remove(int v)
         {
             manager.Navigator.NavigateToGroupPage();
+
+            if (!isElementPresent(By.XPath("(//input[@name='selected[]'])[1]")))
+            {
+                GroupData group = new GroupData("any", "test", "todel");
+                Create(group);
+            }
+            
             SelectGroup(v);
             DeleteGroup();
             GoBackToGroupPage();
