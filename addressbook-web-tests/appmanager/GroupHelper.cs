@@ -25,6 +25,22 @@ namespace addressbook_web_tests
             GoBackToGroupPage();
             return this;
         }
+        
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+
+            manager.Navigator.NavigateToGroupPage();
+
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//input[@name='selected[]']"));
+            foreach (IWebElement element in elements)
+            {
+                GroupData group = new GroupData(element.Text);
+                groups.Add(group);
+            }
+
+            return groups;
+        }
 
         public GroupHelper Modify(int v, GroupData newGroup)
         {
