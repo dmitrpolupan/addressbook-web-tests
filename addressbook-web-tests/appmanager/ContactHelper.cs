@@ -26,6 +26,26 @@ namespace addressbook_web_tests
             return this;
         }
 
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("(//tr[@name='entry'])"));
+
+            foreach(IWebElement element in elements)
+            {
+                string stroka = element.Text;
+                string[] words = stroka.Split(new char[] { ' ' });
+                
+                ContactData contact = new ContactData();
+                contact.Firstname = words[2];
+                contact.LastName = words[1];
+                contacts.Add(contact);
+            }
+
+            return contacts;
+        }
+
         internal ContactHelper Modify(int v, ContactData newContact)
         {
             manager.Navigator.NavigateToHomePage();

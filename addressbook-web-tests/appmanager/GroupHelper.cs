@@ -32,7 +32,8 @@ namespace addressbook_web_tests
 
             manager.Navigator.NavigateToGroupPage();
 
-            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//input[@name='selected[]']"));
+            //ICollection<IWebElement> elements = driver.FindElements(By.XPath("//input[@name='selected[]']"));
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("div#content br"));
             foreach (IWebElement element in elements)
             {
                 GroupData group = new GroupData(element.Text);
@@ -103,7 +104,7 @@ namespace addressbook_web_tests
 
         public GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
             return this;
         }
 
