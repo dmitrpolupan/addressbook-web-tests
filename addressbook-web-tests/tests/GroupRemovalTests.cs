@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace addressbook_web_tests
 {
     [TestFixture]
-    public class GroupRemovalTests : AuthTestBase
+    public class GroupRemovalTests : GroupTestBase
     {
         [Test]
         public void GroupRemovalTest_deleteElementFromOld()
@@ -37,6 +37,23 @@ namespace addressbook_web_tests
             foreach (GroupData group in newGroups)
             {
                 Assert.AreNotEqual(group.ID, oldGroups[1].ID);
+            }
+        }
+
+        [Test]
+        public void GroupRemovalTest_takenFromDB()
+        {
+            List<GroupData> oldGroups = GroupData.GetAllFromDb();
+            GroupData toBeDeleted = oldGroups[0];
+            app.Groups.Remove(toBeDeleted);
+
+            Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
+
+            List<GroupData> newGroups = GroupData.GetAllFromDb();
+
+            foreach (GroupData group in newGroups)
+            {
+                Assert.AreNotEqual(group.ID, toBeDeleted.ID);
             }
         }
     }

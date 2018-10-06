@@ -52,6 +52,22 @@ namespace addressbook_web_tests
             return new List<GroupData>(groupCash);
         }
 
+        public GroupHelper Remove(GroupData groupDel)
+        {
+            manager.Navigator.NavigateToGroupPage();
+
+            if (!isElementPresent(By.XPath("(//input[@name='selected[]'])[" + ( 1) + "]")))
+            {
+                GroupData group = new GroupData("any", "test", "todel");
+                Create(group);
+            }
+
+            SelectGroup(groupDel.ID);
+            DeleteGroup();
+            GoBackToGroupPage();
+            return this;
+        }
+
         public List<GroupData> GetGroupListFROMVIDEO_neSovsemRabotaet()
         {
             if (groupCash == null)
@@ -175,6 +191,12 @@ namespace addressbook_web_tests
         public GroupHelper SelectGroup(int index)
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
+            return this;
+        }
+
+        public GroupHelper SelectGroup(String id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
             return this;
         }
 

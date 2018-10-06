@@ -12,12 +12,12 @@ using System.Linq;
 namespace addressbook_web_tests
 {
     [TestFixture]
-    public class GroupCreationTests : AuthTestBase
+    public class GroupCreationTests : GroupTestBase
     {
         public static IEnumerable<GroupData> RandomGroupDataProvider()
         {
             List<GroupData> groups = new List<GroupData>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 1; i++)
             {
                 groups.Add(new GroupData(GenerateRandomString(10))
                     {
@@ -157,6 +157,25 @@ namespace addressbook_web_tests
             
             end = DateTime.Now;
             System.Console.Out.WriteLine(end.Subtract(start));
+        }
+
+        [Test, TestCaseSource("RandomGroupDataProvider")]
+        public void GroupCreationTest_fromDB(GroupData group)
+        {
+            //GroupData group = new GroupData("with2", "header", "footer");
+
+            List<GroupData> oldGroups = GroupData.GetAllFromDb(); ;
+
+            app.Groups.Create(group);
+
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
+
+            List<GroupData> newGroups = GroupData.GetAllFromDb();
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups.Count, newGroups.Count);
+
         }
     }
 }
