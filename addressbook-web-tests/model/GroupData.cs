@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LinqToDB.Mapping;
 
 namespace addressbook_web_tests
 {
+    [Table(Name = "group_list")]
     public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
-        private string name;
+        /*private string name;
         private string header = "";
         private string footer = "";
 
@@ -44,17 +46,33 @@ namespace addressbook_web_tests
             {
                 footer = value;
             }
+        }*/
+        [Column(Name= "group_name"), NotNull]
+        public string Name { get; set; }
+
+        [Column(Name = "group_header"), NotNull]
+        public string Header { get; set; }
+
+        [Column(Name = "group_footer"), NotNull]
+        public string Footer { get; set; }
+
+        [Column(Name = "group_id"), PrimaryKey, Identity, NotNull]
+        public string ID { get; set; }
+
+        public GroupData()
+        {
+            
         }
 
         public GroupData(string name)
         {
-            this.name = name;
+            Name = name;
         }
         public GroupData(string name, string header, string footer)
         {
-            this.name = name;
-            this.header = header;
-            this.footer = footer;
+            Name = name;
+            Header = header;
+            Footer = footer;
         }
 
         public bool Equals(GroupData other)
@@ -77,7 +95,7 @@ namespace addressbook_web_tests
 
         public override string ToString()
         {
-            return "name=" + Name;
+            return "name=" + Name + "\n header= " + Header + "\n footer=" + Footer;
         }
 
         public int CompareTo(GroupData other)
@@ -88,5 +106,14 @@ namespace addressbook_web_tests
             }
             return Name.CompareTo(other.Name);
         }
+
+        public static List<GroupData> GetAllFromDb()
+        {
+            AddressBookDB db = new AddressBookDB();
+            List<GroupData> listFromDB = (from g in db.Groups select g).ToList();
+            db.Close();
+            return listFromDB;
+        }
+      
     }
 }

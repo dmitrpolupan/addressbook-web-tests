@@ -8,36 +8,16 @@ namespace addressbook_web_tests
 {
     public class AccountName
     {
-        private string name;
-        private string password;
         
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                name = value;
-            }
-        }
-        public string Password
-        {
-            get
-            {
-                return password;
-            }
-            set
-            {
-                password = value;
-            }
-        }
+        public string Name { get; set; }
+        
+        public string Password { get; set; }
+
 
         public AccountName(string name, string password)
         {
-            this.name = name;
-            this.password = password;
+            Name = name;
+            Password = password;
         }
 
     }

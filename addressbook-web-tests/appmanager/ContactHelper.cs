@@ -16,6 +16,21 @@ namespace addressbook_web_tests
         {
         }
 
+        public ContactData GetContactInformationFromTable(int index)
+        {
+            ContactData cc = new ContactData();
+            return cc;
+        }
+
+        public ContactData GetContactInformationFromForm(int index)
+        {
+            ContactData cc = new ContactData();
+            manager.Navigator.NavigateToHomePage();
+            InitContactModification(index);
+
+            return cc;
+        }
+
         public ContactHelper Create(ContactData contact)
         {
             manager.Navigator.NavigateToCreationContactPage();
@@ -116,7 +131,7 @@ namespace addressbook_web_tests
         
         public ContactHelper InitContactModification(int v)
         {
-            int a = v + 1;
+            int a = v + 2;
             driver.FindElement(By.XPath("(//table[@id='maintable']//tr[" + a + "]/td[8]/a)")).Click();
             return this;
         }

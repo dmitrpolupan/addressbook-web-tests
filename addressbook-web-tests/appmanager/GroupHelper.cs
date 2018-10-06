@@ -25,22 +25,90 @@ namespace addressbook_web_tests
             GoBackToGroupPage();
             return this;
         }
-        
+
+        private List<GroupData> groupCash = null;
+
         public List<GroupData> GetGroupList()
         {
-            List<GroupData> groups = new List<GroupData>();
-
-            manager.Navigator.NavigateToGroupPage();
-
-            //ICollection<IWebElement> elements = driver.FindElements(By.XPath("//input[@name='selected[]']"));
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("div#content br"));
-            foreach (IWebElement element in elements)
+            if (groupCash == null)
             {
-                GroupData group = new GroupData(element.Text);
-                groups.Add(group);
+                groupCash = new List<GroupData>();
+                manager.Navigator.NavigateToGroupPage();
+
+                //ICollection<IWebElement> elements = driver.FindElements(By.XPath("//input[@name='selected[]']"));
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//input[@type='checkbox']"));
+                //ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("div#content br"));
+                foreach (IWebElement element in elements)
+                {
+                    groupCash.Add(new GroupData(element.Text)
+                    {
+                        ID = element.GetAttribute("value")
+                    });
+
+
+                }
+            }
+            
+            return new List<GroupData>(groupCash);
+        }
+
+        public List<GroupData> GetGroupListFROMVIDEO_neSovsemRabotaet()
+        {
+            if (groupCash == null)
+            {
+                groupCash = new List<GroupData>();
+                manager.Navigator.NavigateToGroupPage();
+
+                //ICollection<IWebElement> elements = driver.FindElements(By.XPath("//input[@name='selected[]']"));
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//input[@type='checkbox']"));
+                //ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("div#content br"));
+                //ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("div#content input"));
+                foreach (IWebElement element in elements)
+                {
+                    // groupCash.Add(new GroupData(element.Text)
+                    groupCash.Add(new GroupData(null)
+                    {
+                        ID = driver.FindElement(By.XPath("//input[@type='checkbox']")).GetAttribute("value")
+                    });
+
+                    string allGroupNames = driver.FindElement(By.CssSelector("div#content form")).Text;
+                    string[] res = allGroupNames.Split('\n');
+
+                    int shift = groupCash.Count - res.Length;
+
+                    for (int i = 0; i < res.Length - 1; i++)
+                    {
+                        if (i > shift)
+                        {
+                            res[i] = res[i].Substring(0, res[i].Length - 1);
+                        }
+
+                    }
+
+                    for (int i = 0; i < groupCash.Count; i++)
+                    {
+                        if (i < shift)
+                        {
+                            groupCash[i].Name = "";
+                        }
+                        else
+                        {
+                            groupCash[i].Name = res[i];
+                        }
+
+                    }
+
+                }
             }
 
-            return groups;
+            return new List<GroupData>(groupCash);
+        }
+
+
+        public int GetGroupCount()
+        {
+            return driver.FindElements(By.XPath("//input[@type='checkbox']")).Count;
+            //return driver.FindElements(By.CssSelector("div#content br")).Count;
         }
 
         public GroupHelper Modify(int v, GroupData newGroup)
@@ -63,7 +131,7 @@ namespace addressbook_web_tests
         {
             manager.Navigator.NavigateToGroupPage();
 
-            if (!isElementPresent(By.XPath("(//input[@name='selected[]'])[1]")))
+            if (!isElementPresent(By.XPath("(//input[@name='selected[]'])[" + (v+1) + "]")))
             {
                 GroupData group = new GroupData("any", "test", "todel");
                 Create(group);
@@ -93,12 +161,14 @@ namespace addressbook_web_tests
         public GroupHelper SubmitGroupCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            groupCash = null;
             return this;
         }
 
         public GroupHelper DeleteGroup()
         {
             driver.FindElement(By.Name("delete")).Click();
+            groupCash = null;
             return this;
         }
 
@@ -117,6 +187,7 @@ namespace addressbook_web_tests
         public GroupHelper SubmitGroupUpdating()
         {
             driver.FindElement(By.Name("update")).Click();
+            groupCash = null;
             return this;
         }
 
