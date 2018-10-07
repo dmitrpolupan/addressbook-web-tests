@@ -14,5 +14,7 @@ namespace addressbook_web_tests
         public ITable<GroupData> Groups { get { return GetTable<GroupData>(); } }
 
         public ITable<ContactData> Contacts { get { return GetTable<ContactData>(); } }
+
+        public ITable<GroupContactRelation> GroupContactRel { get { return GetTable<GroupContactRelation>(); } }
     }
 }

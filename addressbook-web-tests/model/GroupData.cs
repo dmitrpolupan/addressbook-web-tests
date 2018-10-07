@@ -114,6 +114,16 @@ namespace addressbook_web_tests
             db.Close();
             return listFromDB;
         }
+
+        public List<ContactData> GetContacts()
+        {
+            AddressBookDB db = new AddressBookDB();
+            List<ContactData> contactsForGroup = (from c in db.Contacts
+                                                    from gct in db.GroupContactRel.Where(p => p.GroupID == ID 
+                                                        && p.ContactID == c.Id) select c).Distinct().ToList();
+            db.Close();
+            return contactsForGroup;
+        }
       
     }
 }

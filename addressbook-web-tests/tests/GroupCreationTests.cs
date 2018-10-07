@@ -142,23 +142,7 @@ namespace addressbook_web_tests
             Assert.AreEqual(oldGroups, newGroups);
 
         }
-
-        [Test]
-        public void TestDBConectivity()
-        {
-            DateTime start = DateTime.Now;
-            List<GroupData> listFromUI = app.Groups.GetGroupList();
-          
-            DateTime end = DateTime.Now;
-            System.Console.Out.WriteLine(end.Subtract(start));
-
-            start = DateTime.Now;
-            List<GroupData> listFromDb = GroupData.GetAllFromDb();
-            
-            end = DateTime.Now;
-            System.Console.Out.WriteLine(end.Subtract(start));
-        }
-
+        
         [Test, TestCaseSource("RandomGroupDataProvider")]
         public void GroupCreationTest_fromDB(GroupData group)
         {
@@ -176,6 +160,37 @@ namespace addressbook_web_tests
             newGroups.Sort();
             Assert.AreEqual(oldGroups.Count, newGroups.Count);
 
+        }
+
+        [Test]
+        public void TestDBConectivity()
+        {
+            /*DateTime start = DateTime.Now;
+            List<GroupData> listFromUI = app.Groups.GetGroupList();
+
+            DateTime end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(start));
+
+            start = DateTime.Now;
+            List<GroupData> listFromDb = GroupData.GetAllFromDb();
+
+            end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(start));*/
+            System.Console.Out.WriteLine("Група 0");
+            foreach (ContactData cc in GroupData.GetAllFromDb()[0].GetContacts())
+            {
+                System.Console.Out.WriteLine(cc);
+            }
+            System.Console.Out.WriteLine("Група 1");
+            foreach (ContactData cc in GroupData.GetAllFromDb()[1].GetContacts())
+            {
+                System.Console.Out.WriteLine(cc);
+            }
+            System.Console.Out.WriteLine("Група 2");
+            foreach (ContactData cc in GroupData.GetAllFromDb()[2].GetContacts())
+            {
+                System.Console.Out.WriteLine(cc);
+            }
         }
     }
 }
