@@ -120,7 +120,8 @@ namespace addressbook_web_tests
             AddressBookDB db = new AddressBookDB();
             List<ContactData> contactsForGroup = (from c in db.Contacts
                                                     from gct in db.GroupContactRel.Where(p => p.GroupID == ID 
-                                                        && p.ContactID == c.Id) select c).Distinct().ToList();
+                                                        && p.ContactID == c.Id && c.Depricated == "0000-00-00 00:00:00")
+                                                            select c).Distinct().ToList();
             db.Close();
             return contactsForGroup;
         }

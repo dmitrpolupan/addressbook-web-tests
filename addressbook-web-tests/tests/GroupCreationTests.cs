@@ -191,6 +191,12 @@ namespace addressbook_web_tests
             {
                 System.Console.Out.WriteLine(cc);
             }
+
+            System.Console.Out.WriteLine("тест");
+            foreach (ContactData cc in ContactData.GetAllFromDb())
+            {
+                System.Console.Out.WriteLine(cc.Depricated);
+            }
         }
     }
 }

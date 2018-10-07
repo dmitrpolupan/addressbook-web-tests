@@ -31,6 +31,39 @@ namespace addressbook_web_tests
             return cc;
         }
 
+        public ContactHelper AddContactToGroup(ContactData cont, GroupData grp)
+        {
+            manager.Navigator.NavigateToHomePage();
+            ClearGroupFilter();
+            SelectContact(cont.Id);
+            SelectGroupToAdd(grp.Name);
+            CommitAddingContactToGroup();
+            new WebDriverWait(driver, TimeSpan(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+
+            return this;
+        }
+
+        public void CommitAddingContactToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+        }
+
+        public void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+        public void SelectContact(string contId)
+        {
+            driver.FindElement(By.Id(contId)).Click();
+        }
+
+        public void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[ALL]");
+        }
+
         public ContactHelper Create(ContactData contact)
         {
             manager.Navigator.NavigateToCreationContactPage();

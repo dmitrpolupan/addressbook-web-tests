@@ -8,7 +8,7 @@ using LinqToDB.Mapping;
 namespace addressbook_web_tests
 {
     [Table(Name = "addressbook")]
-    public class ContactData : IEquatable<ContactData>
+    public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         [Column(Name = "id"), PrimaryKey]
         public string Id { get; set; }
@@ -24,6 +24,9 @@ namespace addressbook_web_tests
 
         [Column(Name = "nickname"), NotNull]
         public string Nickname { get; set; }
+
+        [Column(Name = "deprecated")]
+        public string Depricated { get; set; }
 
         public string Title { get; set; }
         public string Company { get; set; }
@@ -68,6 +71,23 @@ namespace addressbook_web_tests
         public override string ToString()
         {
             return "ID=" + Id + ", Firstname=" + Firstname + ", Middlename=" + Middlename + ", Lastname=" + LastName + ", Nickname=" + Nickname;
+        }
+
+        public int CompareTo(ContactData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return 1;
+            }
+            return Id.CompareTo(other.Id);
+        }
+
+        public static List<ContactData> GetAllFromDb()
+        {
+            AddressBookDB db = new AddressBookDB();
+            List<ContactData> listFromDB = (from c in db.Contacts.Where(x => x.Depricated == "0000-00-00 00:00:00") select c).ToList();
+            db.Close();
+            return listFromDB;
         }
 
     }
